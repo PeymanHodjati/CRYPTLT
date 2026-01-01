@@ -113,9 +113,13 @@ export async function POST(req: Request) {
 
 // Handle GET requests (for webhook verification)
 export async function GET() {
+  const hasToken = !!BOT_TOKEN;
   return NextResponse.json({ 
     message: 'Telegram bot webhook endpoint',
     status: 'active',
-    instructions: 'Set webhook URL to: https://cryptoolate.com/api/bot'
+    hasToken: hasToken,
+    webAppUrl: WEB_APP_URL,
+    instructions: 'Set webhook URL to: https://www.managesolana.com/api/bot',
+    note: hasToken ? 'Bot token is configured' : '⚠️ Bot token is NOT configured - add TELEGRAM_BOT_TOKEN to Vercel environment variables'
   });
 }
