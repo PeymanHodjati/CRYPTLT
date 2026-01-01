@@ -7,19 +7,22 @@ export async function POST(req: Request) {
   try {
     // Verify bot token is configured
     if (!BOT_TOKEN) {
-      console.error('TELEGRAM_BOT_TOKEN is not configured');
+      console.error('❌ TELEGRAM_BOT_TOKEN is not configured');
       return NextResponse.json({ error: 'Bot token not configured' }, { status: 500 });
     }
 
     const body = await req.json();
+    console.log('📥 Received webhook update:', JSON.stringify(body, null, 2));
     
-    // Handle /start command
-    if (body.message && body.message.text === '/start') {
+    // Handle /start command (also handles /start with parameters)
+    if (body.message && body.message.text && body.message.text.startsWith('/start')) {
       const chatId = body.message.chat.id;
       const firstName = body.message.from?.first_name || 'there';
       
+      console.log(`📤 Sending welcome message to chat ${chatId}`);
+      
       // Send welcome message with Mini App button
-      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -43,13 +46,22 @@ export async function POST(req: Request) {
           }
         })
       });
+
+      const result = await response.json();
+      if (!result.ok) {
+        console.error('❌ Telegram API error:', result);
+      } else {
+        console.log('✅ Welcome message sent successfully');
+      }
     }
     
     // Handle /help command
-    if (body.message && body.message.text === '/help') {
+    else if (body.message && body.message.text && body.message.text.startsWith('/help')) {
       const chatId = body.message.chat.id;
       
-      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      console.log(`📤 Sending help message to chat ${chatId}`);
+      
+      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -81,12 +93,21 @@ export async function POST(req: Request) {
           }
         })
       });
+
+      const result = await response.json();
+      if (!result.ok) {
+        console.error('❌ Telegram API error:', result);
+      } else {
+        console.log('✅ Help message sent successfully');
+      }
+    } else {
+      console.log('ℹ️ Received update but no matching command:', body.message?.text || 'no text');
     }
     
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('Telegram webhook error:', error);
-    return NextResponse.json({ error: 'Failed to process webhook' }, { status: 500 });
+    console.error('❌ Telegram webhook error:', error);
+    return NextResponse.json({ error: 'Failed to process webhook', details: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }
 
