@@ -13,8 +13,8 @@ export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || '';
 export const metadata = {
   name: 'Cryptoolate',
   description: 'Reclaim rent from empty Solana token accounts',
-  url: typeof window !== 'undefined' ? window.location.origin : 'https://cryptoolate.vercel.app',
-  icons: ['https://cryptoolate.vercel.app/icon.png'],
+  url: typeof window !== 'undefined' ? window.location.origin : 'https://cryptoolate.com',
+  icons: ['https://cryptoolate.com/icon.png'],
 };
 
 // AppKitProvider component with Solana configuration
