@@ -1,0 +1,40 @@
+'use client';
+
+import { AppKitProvider } from '@reown/appkit/react';
+import { SolanaAdapter } from '@reown/appkit-adapter-solana/react';
+import { solana } from '@reown/appkit/networks';
+
+// Configure AppKit with Solana
+// Get your Project ID from https://cloud.reown.com
+// IMPORTANT: You MUST set NEXT_PUBLIC_PROJECT_ID in your .env.local file
+// The placeholder below will cause build errors - replace it with your actual Project ID
+export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || '';
+
+export const metadata = {
+  name: 'Cryptoolate',
+  description: 'Reclaim rent from empty Solana token accounts',
+  url: typeof window !== 'undefined' ? window.location.origin : 'https://cryptoolate.vercel.app',
+  icons: ['https://cryptoolate.vercel.app/icon.png'],
+};
+
+// AppKitProvider component with Solana configuration
+export default function CryptoolateAppKitProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <AppKitProvider
+      adapters={[new SolanaAdapter()]}
+      projectId={projectId}
+      metadata={metadata}
+      networks={[solana]}
+      features={{
+        analytics: false,
+        email: false,
+      }}
+      themeMode="dark"
+      themeVariables={{
+        '--w3m-accent': '#6366f1',
+      }}
+    >
+      {children}
+    </AppKitProvider>
+  );
+}
