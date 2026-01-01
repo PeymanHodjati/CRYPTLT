@@ -124,9 +124,9 @@ export default function Home() {
   const usdNet = solNet * solPrice;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="glass-header sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
@@ -150,7 +150,7 @@ export default function Home() {
       {/* Main Content */}
       <div className="max-w-md mx-auto px-4 py-6 space-y-4">
         {!isConnected ? (
-          <div className="bg-white rounded-xl p-6 card-shadow text-center space-y-4">
+          <div className="glass rounded-xl p-6 text-center space-y-4">
             <div className="text-5xl mb-2">🔍</div>
             <h2 className="text-xl font-semibold text-gray-900">Connect Wallet to Scan</h2>
             <p className="text-sm text-gray-600">
@@ -169,7 +169,7 @@ export default function Home() {
         ) : (
           <>
             {isScanning ? (
-              <div className="bg-white rounded-xl p-8 card-shadow text-center">
+              <div className="glass rounded-xl p-8 text-center">
                 <div className="text-5xl mb-4 animate-pulse">💰</div>
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">Scanning blockchain...</h2>
                 <p className="text-sm text-gray-600">Looking for zombie accounts...</p>
@@ -182,7 +182,7 @@ export default function Home() {
                 {zombieAccounts.length > 0 ? (
                   <>
                     {/* Portfolio Value Card */}
-                    <div className="bg-white rounded-xl p-6 card-shadow">
+                    <div className="glass rounded-xl p-6">
                       <div className="text-sm text-gray-500 mb-1">Total Portfolio Value</div>
                       <div className="text-3xl font-semibold text-gray-900 mb-4">
                         {solRefund.toFixed(4)} SOL
@@ -192,18 +192,18 @@ export default function Home() {
 
                     {/* Metrics Cards */}
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-white rounded-xl p-4 card-shadow">
+                      <div className="glass rounded-xl p-4">
                         <div className="text-xs text-gray-500 mb-1">Zombie Accounts</div>
                         <div className="text-2xl font-semibold text-gray-900">{zombieAccounts.length}</div>
                       </div>
-                      <div className="bg-white rounded-xl p-4 card-shadow">
+                      <div className="glass rounded-xl p-4">
                         <div className="text-xs text-gray-500 mb-1">Service Fee</div>
                         <div className="text-2xl font-semibold text-yellow-600">{solFee.toFixed(4)} SOL</div>
                       </div>
                     </div>
 
                     {/* Net Amount Card */}
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 card-shadow border border-blue-100">
+                    <div className="glass-dark rounded-xl p-6 border border-blue-200/50">
                       <div className="text-sm text-gray-600 mb-1">You Will Receive</div>
                       <div className="text-3xl font-bold text-blue-600 mb-1">
                         {solNet.toFixed(4)} SOL
@@ -213,7 +213,7 @@ export default function Home() {
 
                     {/* Batch Navigation */}
                     {batches.length > 1 && (
-                      <div className="bg-white rounded-xl p-4 card-shadow">
+                      <div className="glass rounded-xl p-4">
                         <div className="flex justify-between items-center mb-3">
                           <span className="text-sm text-gray-600">Transaction Batch</span>
                           <span className="text-sm font-semibold text-gray-900">
@@ -256,7 +256,7 @@ export default function Home() {
                     </button>
 
                     {/* Info Card */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm">
+                    <div className="glass rounded-xl p-4 text-sm border border-blue-200/50">
                       <p className="font-medium text-blue-900 mb-2">ℹ️ How it works</p>
                       <ul className="list-disc list-inside space-y-1 text-xs text-blue-800">
                         <li>Closing empty accounts refunds the rent you paid</li>
@@ -266,7 +266,7 @@ export default function Home() {
                     </div>
                   </>
                 ) : (
-                  <div className="bg-white rounded-xl p-8 card-shadow text-center">
+                  <div className="glass rounded-xl p-8 text-center">
                     <div className="text-5xl mb-4">✅</div>
                     <h2 className="text-xl font-semibold text-gray-900 mb-2">No Zombie Accounts Found</h2>
                     <p className="text-sm text-gray-600 mb-4">
@@ -290,7 +290,7 @@ export default function Home() {
             )}
 
             {/* Wallet Info */}
-            <div className="bg-white rounded-xl p-4 card-shadow">
+            <div className="glass rounded-xl p-4">
               {isConnected && address ? (
                 <div className="flex items-center justify-between">
                   <div>

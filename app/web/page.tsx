@@ -114,9 +114,9 @@ export default function WebPage() {
   const usdNet = solNet * solPrice;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="glass-header sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
@@ -150,7 +150,7 @@ export default function WebPage() {
           {/* Left Column - Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {!isConnected ? (
-              <div className="bg-white rounded-xl p-8 card-shadow text-center">
+              <div className="glass rounded-xl p-8 text-center">
                 <div className="text-6xl mb-6">🔍</div>
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">Connect Your Wallet</h2>
                 <p className="text-gray-600 mb-6 max-w-md mx-auto">
@@ -169,7 +169,7 @@ export default function WebPage() {
             ) : (
               <>
                 {isScanning ? (
-                  <div className="bg-white rounded-xl p-8 card-shadow text-center">
+                  <div className="glass rounded-xl p-8 text-center">
                     <div className="text-6xl mb-4 animate-pulse">💰</div>
                     <h2 className="text-2xl font-semibold text-gray-900 mb-2">Scanning blockchain...</h2>
                     <p className="text-gray-600">Looking for zombie accounts...</p>
@@ -182,7 +182,7 @@ export default function WebPage() {
                     {zombieAccounts.length > 0 ? (
                       <>
                         {/* Total Portfolio Value */}
-                        <div className="bg-white rounded-xl p-6 card-shadow">
+                        <div className="glass-dark rounded-xl p-6">
                           <div className="text-sm text-gray-500 mb-1">Total Portfolio Value</div>
                           <div className="text-4xl font-semibold text-gray-900">
                             {solRefund.toFixed(4)} SOL
@@ -192,26 +192,26 @@ export default function WebPage() {
 
                         {/* Metrics Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                          <div className="bg-white rounded-xl p-4 card-shadow">
+                          <div className="glass rounded-xl p-4">
                             <div className="text-xs text-gray-500 mb-1">Zombie Accounts</div>
                             <div className="text-2xl font-semibold text-gray-900">{zombieAccounts.length}</div>
                           </div>
-                          <div className="bg-white rounded-xl p-4 card-shadow">
+                          <div className="glass rounded-xl p-4">
                             <div className="text-xs text-gray-500 mb-1">Pending Claims</div>
                             <div className="text-2xl font-semibold text-gray-900">{batches.length}</div>
                           </div>
-                          <div className="bg-white rounded-xl p-4 card-shadow">
+                          <div className="glass rounded-xl p-4">
                             <div className="text-xs text-gray-500 mb-1">Monthly Change</div>
                             <div className="text-2xl font-semibold text-green-600">+ {((solNet / (solRefund || 1)) * 100).toFixed(1)}%</div>
                           </div>
-                          <div className="bg-white rounded-xl p-4 card-shadow">
+                          <div className="glass rounded-xl p-4">
                             <div className="text-xs text-gray-500 mb-1">Avg Claim Size</div>
                             <div className="text-2xl font-semibold text-gray-900">{solNet > 0 ? (solNet / batches.length).toFixed(4) : '0.0000'} SOL</div>
                           </div>
                         </div>
 
                         {/* Net Amount Card */}
-                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 card-shadow border border-blue-100">
+                        <div className="glass-dark rounded-xl p-6 border border-blue-200/50">
                           <div className="flex justify-between items-center">
                             <div>
                               <div className="text-sm text-gray-600 mb-1">You Will Receive</div>
@@ -231,7 +231,7 @@ export default function WebPage() {
 
                         {/* Batch Navigation */}
                         {batches.length > 1 && (
-                          <div className="bg-white rounded-xl p-4 card-shadow">
+                          <div className="glass rounded-xl p-4">
                             <div className="flex justify-between items-center mb-3">
                               <span className="text-sm text-gray-600">Transaction Batch</span>
                               <span className="text-sm font-semibold text-gray-900">
@@ -274,7 +274,7 @@ export default function WebPage() {
                         </button>
                       </>
                     ) : (
-                      <div className="bg-white rounded-xl p-8 card-shadow text-center">
+                      <div className="glass rounded-xl p-8 text-center">
                         <div className="text-6xl mb-4">✅</div>
                         <h2 className="text-2xl font-semibold text-gray-900 mb-2">No Zombie Accounts Found</h2>
                         <p className="text-gray-600 mb-6">
@@ -303,7 +303,7 @@ export default function WebPage() {
           {/* Right Column - Info Panel */}
           <div className="space-y-6">
             {/* How It Works */}
-            <div className="bg-white rounded-xl p-6 card-shadow">
+            <div className="glass rounded-xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">How It Works</h3>
               <ul className="space-y-3 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
@@ -326,7 +326,7 @@ export default function WebPage() {
             </div>
 
             {/* Safety Info */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <div className="glass rounded-xl p-6 border border-blue-200/50">
               <h3 className="text-lg font-semibold text-blue-900 mb-3">🔒 Safety & Security</h3>
               <ul className="space-y-2 text-sm text-blue-800">
                 <li>✓ Atomic transactions - all or nothing</li>
@@ -338,7 +338,7 @@ export default function WebPage() {
 
             {/* Transaction Details */}
             {zombieAccounts.length > 0 && (
-              <div className="bg-white rounded-xl p-6 card-shadow">
+              <div className="glass rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Transaction Details</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
@@ -367,7 +367,7 @@ export default function WebPage() {
       </div>
 
       {/* Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-white/30">
         <div className="text-center text-sm text-gray-500">
           <p>Cryptoolate - Reclaim your Solana rent</p>
           <p className="mt-2">Built with Next.js, Reown AppKit, and Solana</p>
