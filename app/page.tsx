@@ -130,7 +130,7 @@ export default function Home() {
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-900">Cryptoolate</h1>
+              <h1 className="text-2xl font-semibold text-gray-900">Manage Solana</h1>
               <p className="text-sm text-gray-500 mt-0.5">
                 Reclaim rent from empty token accounts
               </p>

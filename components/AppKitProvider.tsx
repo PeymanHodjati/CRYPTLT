@@ -11,14 +11,14 @@ import { solana } from '@reown/appkit/networks';
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || '';
 
 export const metadata = {
-  name: 'Cryptoolate',
+  name: 'Manage Solana',
   description: 'Reclaim rent from empty Solana token accounts',
-  url: typeof window !== 'undefined' ? window.location.origin : 'https://cryptoolate.com',
-  icons: ['https://cryptoolate.com/icon.png'],
+  url: typeof window !== 'undefined' ? window.location.origin : 'https://managesolana.com',
+  icons: ['https://managesolana.com/icon.png'],
 };
 
 // AppKitProvider component with Solana configuration
-export default function CryptoolateAppKitProvider({ children }: { children: React.ReactNode }) {
+export default function ManageSolanaAppKitProvider({ children }: { children: React.ReactNode }) {
   return (
     <AppKitProvider
       adapters={[new SolanaAdapter()]}

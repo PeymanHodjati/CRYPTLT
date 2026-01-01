@@ -2,12 +2,12 @@
 
 ## Your Live URLs
 
-✅ **Main App (Telegram Optimized)**: https://cryptoolate.com/  
-✅ **Web Version (Desktop)**: https://cryptoolate.com/web
+✅ **Main App (Telegram Optimized)**: https://managesolana.com/  
+✅ **Web Version (Desktop)**: https://managesolana.com/web
 
 ## Configuration Status
 
-✅ **Domain**: cryptoolate.com connected to Vercel  
+✅ **Domain**: managesolana.com connected to Vercel  
 ✅ **Environment Variables**: Set in Vercel  
 ✅ **Project ID**: Configured  
 ✅ **Treasury Wallet**: Configured  
@@ -17,12 +17,12 @@
 ### 1. Test Your Deployment
 
 Visit both URLs and test:
-- **Main App**: https://cryptoolate.com/
+- **Main App**: https://managesolana.com/
   - Should work great on mobile/Telegram
   - Test wallet connection
   - Test scanning and claiming
 
-- **Web Version**: https://cryptoolate.com/web
+- **Web Version**: https://managesolana.com/web
   - Desktop-optimized layout
   - Same functionality, better UI for browsers
 
@@ -37,12 +37,12 @@ Now that your app is live, configure the Telegram Mini App:
 5. Create Mini App: `/newapp`
 6. Select your bot
 7. Upload a 640x360 image (screenshot of your app)
-8. **Set Web App URL**: `https://cryptoolate.com`
+8. **Set Web App URL**: `https://managesolana.com`
 9. Configure menu button:
    - `/mybots` → Select your bot
    - "Bot Settings" → "Menu Button"
    - Set text: "Open App" or "Reclaim Rent"
-   - Set URL: `https://cryptoolate.com`
+   - Set URL: `https://managesolana.com`
 
 ### 3. Test the Full Flow
 
@@ -88,7 +88,7 @@ Now that your app is live, configure the Telegram Mini App:
 - Test with small amounts first
 
 ### Telegram Mini App Not Loading
-- Verify URL in BotFather matches: `https://cryptoolate.com`
+- Verify URL in BotFather matches: `https://managesolana.com`
 - Check that domain is accessible
 - Ensure HTTPS is enabled
 
@@ -100,7 +100,7 @@ Now that your app is live, configure the Telegram Mini App:
 
 ## 🚀 You're Live!
 
-Your Cryptoolate app is now live at cryptoolate.com!
+Your Manage Solana app is now live at managesolana.com!
 
 Users can:
 - Access via web browser

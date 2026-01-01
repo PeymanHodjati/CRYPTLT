@@ -120,7 +120,7 @@ export default function WebPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-900">Cryptoolate</h1>
+              <h1 className="text-2xl font-semibold text-gray-900">Manage Solana</h1>
               <p className="text-sm text-gray-500 mt-0.5">
                 Dashboard {'>'} My Portfolio
               </p>
@@ -369,7 +369,7 @@ export default function WebPage() {
       {/* Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-white/30">
         <div className="text-center text-sm text-gray-500">
-          <p>Cryptoolate - Reclaim your Solana rent</p>
+          <p>Manage Solana - Reclaim your Solana rent</p>
           <p className="mt-2">Built with Next.js, Reown AppKit, and Solana</p>
         </div>
       </div>
