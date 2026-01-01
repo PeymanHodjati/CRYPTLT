@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@metaplex-foundation/mpl-token-metadata": "^3.4.0",
     "@reown/appkit": "^1.8.15",
     "@reown/appkit-adapter-solana": "^1.8.15",
     "@solana/spl-token": "^0.4.14",

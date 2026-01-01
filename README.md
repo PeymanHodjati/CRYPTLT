@@ -1,14 +1,21 @@
-# Cryptoolate - Telegram Mini App
+# Manage Solana - Solana Toolkit Telegram Mini App
 
-A Telegram Mini App that helps users reclaim rent from empty Solana token accounts (zombie accounts).
+A comprehensive Telegram Mini App that provides multiple tools to manage and optimize your Solana wallet.
 
 ## Features
 
-- 🔍 **Automatic Scanning**: Finds all empty token accounts in a user's wallet
+### 🛠️ Multi-Tool Dashboard
+- **💰 The Rent Finder**: Reclaim rent from empty token accounts
+- **🔥 The Spam Burner**: Burn spam NFTs and tokens, reclaim rent
+- **🪙 Loose Change Collector**: Batch swap small token balances into SOL
+- **🔒 Permissions Revoke**: Revoke risky token approvals (free)
+
+### Core Features
+- 🔍 **Automatic Scanning**: Finds zombie accounts, spam items, and permissions
 - 💰 **Rent Reclamation**: Closes empty accounts to refund locked SOL
-- 🔒 **Atomic Transactions**: Fee is only charged if the claim succeeds
+- 🔒 **Atomic Transactions**: Fees only charged if operations succeed
 - 📱 **Mobile Optimized**: Built for Telegram's mobile interface
-- 🌙 **Dark Mode**: Beautiful dark theme UI
+- ✨ **Glassmorphism UI**: Beautiful modern design with glass effects
 
 ## Tech Stack
 
@@ -84,23 +91,54 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Configure Telegram Bot
 
+Your bot is already created: **@ManageSolanaBot**
+
 1. Open Telegram and search for `@BotFather`
-2. Create a new bot: `/newbot`
-3. Create a Mini App: `/newapp`
-4. Upload a 640x360 image
-5. Set the Web App URL to your Vercel deployment (e.g., `https://cryptoolate.vercel.app`)
-6. Configure the menu button to launch the app
+2. Send `/mybots` and select **ManageSolanaBot**
+3. Choose **Bot Settings** → **Menu Button**
+4. Choose **Configure Menu Button**
+5. Enter:
+   - **Button Text**: "Open App" (or "Manage Solana")
+   - **Web App URL**: `https://cryptoolate.com` (or your Vercel deployment URL)
+
+Alternatively, use the command:
+```
+/setmenubutton
+@ManageSolanaBot
+Open App
+https://cryptoolate.com
+```
+
+**See `TELEGRAM_BOT_SETUP.md` for detailed setup instructions.**
 
 ## How It Works
 
+### The Rent Finder
 1. **User connects wallet** (Phantom, Solflare, or Backpack)
 2. **App scans** for empty token accounts (0 balance)
 3. **App calculates** total recoverable rent and fee
-4. **User clicks "Claim All"** and signs a single atomic transaction
+4. **User clicks "Claim"** and signs a single atomic transaction
 5. **Transaction includes**:
    - Instructions to close all empty accounts (refunding rent)
    - One transfer instruction to send the fee to your treasury wallet
 6. **If any close fails**, the entire transaction fails (user doesn't pay)
+
+### The Spam Burner
+1. **App scans** for NFTs and tokens in the wallet
+2. **User selects** spam items to burn (up to 50 at once)
+3. **User clicks "Incinerate"** - items are closed and rent is refunded
+4. **15% fee** is taken from the refunded rent
+
+### Loose Change Collector
+1. **App scans** for tokens with small balances (<$1)
+2. **User selects** tokens to swap
+3. **Batch swap** via Jupiter API converts all to SOL
+4. **1% spread** or 0.01 SOL flat fee
+
+### Permissions Revoke
+1. **App scans** for active token approvals
+2. **User reviews** risky permissions
+3. **One-click revoke** - completely free
 
 ## Transaction Batching
 
@@ -117,9 +155,12 @@ Solana transactions have a size limit (~1232 bytes). The app automatically batch
 
 ## Revenue Model
 
-- Fee: 0.005 SOL (~$1) per claim transaction
-- Fee is taken from the reclaimed rent (no extra payment needed)
-- Fee only charged if the claim succeeds
+- **Rent Finder**: 0.005 SOL (~$1) per claim transaction
+- **Spam Burner**: 15% of refunded rent per burn
+- **Loose Change Collector**: 1% spread or 0.01 SOL flat fee
+- **Permissions Revoke**: Free (no fees)
+
+All fees are taken from reclaimed/optimized funds - users never pay extra.
 
 ## Support
 
