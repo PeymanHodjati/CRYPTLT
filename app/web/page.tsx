@@ -35,7 +35,6 @@ export default function WebPage() {
       const accounts = await findZombieAccounts(solanaConnection, userPubkey);
       setZombieAccounts(accounts);
 
-      // Create batches for transactions
       const accountPubkeys = accounts.map(acc => acc.pubkey);
       const accountBatches = batchZombieAccounts(accountPubkeys, MAX_ACCOUNTS_PER_TX);
       setBatches(accountBatches);
@@ -52,7 +51,6 @@ export default function WebPage() {
     }
   }, [address, connection]);
 
-  // Auto-scan when wallet connects
   useEffect(() => {
     if (isConnected && address) {
       handleScan();
@@ -75,26 +73,20 @@ export default function WebPage() {
       const solanaConnection = connection || createConnection();
       const userPubkey = new PublicKey(address);
 
-      // Build the atomic transaction
       const transaction = await buildClaimTransaction(
         userPubkey,
         accountsToClaim,
         solanaConnection
       );
 
-      // Send transaction via wallet provider
       const signature = await (walletProvider as any).sendTransaction(transaction, solanaConnection);
-
-      // Wait for confirmation
       await solanaConnection.confirmTransaction(signature, 'confirmed');
 
-      // Update state - remove claimed accounts
       const remainingAccounts = zombieAccounts.filter(
         acc => !accountsToClaim.some(claimed => claimed.equals(acc.pubkey))
       );
       setZombieAccounts(remainingAccounts);
 
-      // Update batches
       if (remainingAccounts.length > 0) {
         const accountPubkeys = remainingAccounts.map(acc => acc.pubkey);
         const accountBatches = batchZombieAccounts(accountPubkeys, MAX_ACCOUNTS_PER_TX);
@@ -104,7 +96,6 @@ export default function WebPage() {
         setBatches([]);
       }
 
-      setError(null);
       alert(`Success! Claimed ${accountsToClaim.length} accounts. Transaction: ${signature}`);
     } catch (err: any) {
       setError(err.message || 'Failed to claim. Please try again.');
@@ -119,27 +110,25 @@ export default function WebPage() {
   const solRefund = totalRefund / 1_000_000_000;
   const solFee = FEE_LAMPORTS / 1_000_000_000;
   const solNet = (totalRefund - FEE_LAMPORTS) / 1_000_000_000;
-  const solPrice = 160; // Rough estimate
+  const solPrice = 160;
   const usdNet = solNet * solPrice;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700/50 sticky top-0 z-10">
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                💰 Cryptoolate
-              </h1>
-              <p className="text-sm text-gray-400 mt-1">
-                Reclaim rent from empty Solana token accounts
+              <h1 className="text-2xl font-semibold text-gray-900">Cryptoolate</h1>
+              <p className="text-sm text-gray-500 mt-0.5">
+                Dashboard {'>'} My Portfolio
               </p>
             </div>
             {isConnected && address && (
-              <div className="px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-lg">
-                <div className="text-xs text-gray-400">Connected</div>
-                <div className="text-sm font-mono text-green-400">
+              <div className="px-4 py-2 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="text-xs text-gray-500">Connected</div>
+                <div className="text-sm font-mono text-blue-600">
                   {address.slice(0, 6)}...{address.slice(-4)}
                 </div>
               </div>
@@ -149,21 +138,27 @@ export default function WebPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-6">
+          <h2 className="text-3xl font-semibold text-gray-900 mb-2">My Portfolio</h2>
+          {isConnected && address && (
+            <p className="text-sm text-gray-500">As of {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+          )}
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Wallet Connection Card */}
             {!isConnected ? (
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 text-center">
+              <div className="bg-white rounded-xl p-8 card-shadow text-center">
                 <div className="text-6xl mb-6">🔍</div>
-                <h2 className="text-2xl font-semibold mb-4">Connect Your Wallet</h2>
-                <p className="text-gray-400 mb-6 max-w-md mx-auto">
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Connect Your Wallet</h2>
+                <p className="text-gray-600 mb-6 max-w-md mx-auto">
                   Connect your Phantom, Solflare, or Backpack wallet to scan for unclaimed rent from empty token accounts.
                 </p>
                 <button
                   onClick={() => open()}
-                  className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                  className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors card-shadow"
                 >
                   Connect Wallet
                 </button>
@@ -173,62 +168,73 @@ export default function WebPage() {
               </div>
             ) : (
               <>
-                {/* Scanning State */}
                 {isScanning ? (
-                  <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 text-center">
+                  <div className="bg-white rounded-xl p-8 card-shadow text-center">
                     <div className="text-6xl mb-4 animate-pulse">💰</div>
-                    <h2 className="text-2xl font-semibold mb-2">Scanning blockchain...</h2>
-                    <p className="text-gray-400">Looking for zombie accounts...</p>
-                    <div className="mt-6 w-full bg-gray-700 rounded-full h-2">
-                      <div className="bg-indigo-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+                    <h2 className="text-2xl font-semibold text-gray-900 mb-2">Scanning blockchain...</h2>
+                    <p className="text-gray-600">Looking for zombie accounts...</p>
+                    <div className="mt-6 w-full bg-gray-100 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
                     </div>
                   </div>
                 ) : (
                   <>
-                    {/* Results */}
                     {zombieAccounts.length > 0 ? (
-                      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
-                        <h2 className="text-xl font-semibold mb-4">Found Zombie Accounts</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                          <div className="bg-gray-700/50 rounded-lg p-4">
-                            <div className="text-sm text-gray-400 mb-1">Accounts</div>
-                            <div className="text-2xl font-bold text-white">{zombieAccounts.length}</div>
+                      <>
+                        {/* Total Portfolio Value */}
+                        <div className="bg-white rounded-xl p-6 card-shadow">
+                          <div className="text-sm text-gray-500 mb-1">Total Portfolio Value</div>
+                          <div className="text-4xl font-semibold text-gray-900">
+                            {solRefund.toFixed(4)} SOL
                           </div>
-                          <div className="bg-green-500/20 rounded-lg p-4 border border-green-500/30">
-                            <div className="text-sm text-gray-400 mb-1">Recoverable</div>
-                            <div className="text-2xl font-bold text-green-400">
-                              {solRefund.toFixed(4)} SOL
-                            </div>
-                            <div className="text-xs text-gray-400">~${(solRefund * solPrice).toFixed(2)}</div>
+                          <div className="text-sm text-gray-500 mt-1">~${(solRefund * solPrice).toFixed(2)} USD</div>
+                        </div>
+
+                        {/* Metrics Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                          <div className="bg-white rounded-xl p-4 card-shadow">
+                            <div className="text-xs text-gray-500 mb-1">Zombie Accounts</div>
+                            <div className="text-2xl font-semibold text-gray-900">{zombieAccounts.length}</div>
                           </div>
-                          <div className="bg-yellow-500/20 rounded-lg p-4 border border-yellow-500/30">
-                            <div className="text-sm text-gray-400 mb-1">Fee</div>
-                            <div className="text-2xl font-bold text-yellow-400">
-                              {solFee.toFixed(4)} SOL
-                            </div>
-                            <div className="text-xs text-gray-400">~${(solFee * solPrice).toFixed(2)}</div>
+                          <div className="bg-white rounded-xl p-4 card-shadow">
+                            <div className="text-xs text-gray-500 mb-1">Pending Claims</div>
+                            <div className="text-2xl font-semibold text-gray-900">{batches.length}</div>
+                          </div>
+                          <div className="bg-white rounded-xl p-4 card-shadow">
+                            <div className="text-xs text-gray-500 mb-1">Monthly Change</div>
+                            <div className="text-2xl font-semibold text-green-600">+ {((solNet / (solRefund || 1)) * 100).toFixed(1)}%</div>
+                          </div>
+                          <div className="bg-white rounded-xl p-4 card-shadow">
+                            <div className="text-xs text-gray-500 mb-1">Avg Claim Size</div>
+                            <div className="text-2xl font-semibold text-gray-900">{solNet > 0 ? (solNet / batches.length).toFixed(4) : '0.0000'} SOL</div>
                           </div>
                         </div>
 
-                        {/* Net Amount */}
-                        <div className="bg-gradient-to-r from-indigo-600/20 to-purple-600/20 rounded-lg p-6 border border-indigo-500/30 mb-6">
+                        {/* Net Amount Card */}
+                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 card-shadow border border-blue-100">
                           <div className="flex justify-between items-center">
-                            <span className="text-lg font-medium">You Receive</span>
-                            <div className="text-right">
-                              <div className="text-3xl font-bold text-white">
+                            <div>
+                              <div className="text-sm text-gray-600 mb-1">You Will Receive</div>
+                              <div className="text-3xl font-bold text-blue-600">
                                 {solNet.toFixed(4)} SOL
                               </div>
-                              <div className="text-sm text-gray-400">~${usdNet.toFixed(2)}</div>
+                              <div className="text-sm text-gray-500 mt-1">~${usdNet.toFixed(2)} USD</div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-xs text-gray-500 mb-1">Service Fee</div>
+                              <div className="text-lg font-semibold text-yellow-600">
+                                {solFee.toFixed(4)} SOL
+                              </div>
                             </div>
                           </div>
                         </div>
 
                         {/* Batch Navigation */}
                         {batches.length > 1 && (
-                          <div className="bg-gray-700/50 rounded-lg p-4 mb-6">
+                          <div className="bg-white rounded-xl p-4 card-shadow">
                             <div className="flex justify-between items-center mb-3">
-                              <span className="text-gray-400">Transaction Batch</span>
-                              <span className="text-white font-semibold">
+                              <span className="text-sm text-gray-600">Transaction Batch</span>
+                              <span className="text-sm font-semibold text-gray-900">
                                 {currentBatch + 1} of {batches.length}
                               </span>
                             </div>
@@ -236,14 +242,14 @@ export default function WebPage() {
                               <button
                                 onClick={() => setCurrentBatch(Math.max(0, currentBatch - 1))}
                                 disabled={currentBatch === 0}
-                                className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-500 disabled:bg-gray-800 disabled:text-gray-500 rounded-lg transition-colors"
+                                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 text-gray-700 rounded-lg transition-colors text-sm font-medium"
                               >
                                 Previous
                               </button>
                               <button
                                 onClick={() => setCurrentBatch(Math.min(batches.length - 1, currentBatch + 1))}
                                 disabled={currentBatch === batches.length - 1}
-                                className="flex-1 px-4 py-2 bg-gray-600 hover:bg-gray-500 disabled:bg-gray-800 disabled:text-gray-500 rounded-lg transition-colors"
+                                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 text-gray-700 rounded-lg transition-colors text-sm font-medium"
                               >
                                 Next
                               </button>
@@ -255,7 +261,7 @@ export default function WebPage() {
                         <button
                           onClick={() => handleClaim(currentBatchAccounts)}
                           disabled={isClaiming || currentBatchAccounts.length === 0}
-                          className="w-full px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-bold rounded-lg transition-all transform hover:scale-105 shadow-lg text-lg"
+                          className="w-full px-6 py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors card-shadow text-lg"
                         >
                           {isClaiming ? (
                             <span className="flex items-center justify-center gap-2">
@@ -266,17 +272,17 @@ export default function WebPage() {
                             `Claim Batch ${currentBatch + 1} (${currentBatchAccounts.length} accounts) - Receive ${solNet.toFixed(4)} SOL`
                           )}
                         </button>
-                      </div>
+                      </>
                     ) : (
-                      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 text-center">
+                      <div className="bg-white rounded-xl p-8 card-shadow text-center">
                         <div className="text-6xl mb-4">✅</div>
-                        <h2 className="text-2xl font-semibold mb-2">No Zombie Accounts Found</h2>
-                        <p className="text-gray-400 mb-6">
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-2">No Zombie Accounts Found</h2>
+                        <p className="text-gray-600 mb-6">
                           Your wallet is clean! All your token accounts are in use.
                         </p>
                         <button
                           onClick={handleScan}
-                          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+                          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors font-medium"
                         >
                           Scan Again
                         </button>
@@ -285,9 +291,8 @@ export default function WebPage() {
                   </>
                 )}
 
-                {/* Error Display */}
                 {error && (
-                  <div className="bg-red-900/20 border border-red-700/50 rounded-xl p-4 text-red-300">
+                  <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
                     {error}
                   </div>
                 )}
@@ -298,32 +303,32 @@ export default function WebPage() {
           {/* Right Column - Info Panel */}
           <div className="space-y-6">
             {/* How It Works */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
-              <h3 className="text-lg font-semibold mb-4">How It Works</h3>
-              <ul className="space-y-3 text-sm text-gray-300">
+            <div className="bg-white rounded-xl p-6 card-shadow">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">How It Works</h3>
+              <ul className="space-y-3 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-indigo-400 mt-1">1.</span>
+                  <span className="text-blue-600 mt-1 font-semibold">1.</span>
                   <span>Connect your Solana wallet (Phantom, Solflare, or Backpack)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-indigo-400 mt-1">2.</span>
+                  <span className="text-blue-600 mt-1 font-semibold">2.</span>
                   <span>We scan for empty token accounts (zombie accounts)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-indigo-400 mt-1">3.</span>
+                  <span className="text-blue-600 mt-1 font-semibold">3.</span>
                   <span>Close these accounts to reclaim the locked SOL rent</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-indigo-400 mt-1">4.</span>
+                  <span className="text-blue-600 mt-1 font-semibold">4.</span>
                   <span>Pay a small fee (0.005 SOL) and keep the rest</span>
                 </li>
               </ul>
             </div>
 
             {/* Safety Info */}
-            <div className="bg-blue-900/20 border border-blue-700/50 rounded-xl p-6">
-              <h3 className="text-lg font-semibold mb-3 text-blue-300">🔒 Safety & Security</h3>
-              <ul className="space-y-2 text-sm text-blue-200/80">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-blue-900 mb-3">🔒 Safety & Security</h3>
+              <ul className="space-y-2 text-sm text-blue-800">
                 <li>✓ Atomic transactions - all or nothing</li>
                 <li>✓ You only pay if the claim succeeds</li>
                 <li>✓ Non-custodial - we never touch your keys</li>
@@ -331,27 +336,27 @@ export default function WebPage() {
               </ul>
             </div>
 
-            {/* Stats */}
+            {/* Transaction Details */}
             {zombieAccounts.length > 0 && (
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
-                <h3 className="text-lg font-semibold mb-4">Transaction Details</h3>
+              <div className="bg-white rounded-xl p-6 card-shadow">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Transaction Details</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Accounts to close:</span>
-                    <span className="text-white font-mono">{currentBatchAccounts.length}</span>
+                    <span className="text-gray-600">Accounts to close:</span>
+                    <span className="text-gray-900 font-mono font-semibold">{currentBatchAccounts.length}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Rent refund:</span>
-                    <span className="text-green-400 font-mono">{solRefund.toFixed(4)} SOL</span>
+                    <span className="text-gray-600">Rent refund:</span>
+                    <span className="text-green-600 font-mono font-semibold">{solRefund.toFixed(4)} SOL</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Service fee:</span>
-                    <span className="text-yellow-400 font-mono">{solFee.toFixed(4)} SOL</span>
+                    <span className="text-gray-600">Service fee:</span>
+                    <span className="text-yellow-600 font-mono font-semibold">{solFee.toFixed(4)} SOL</span>
                   </div>
-                  <div className="border-t border-gray-700 pt-2 mt-2">
+                  <div className="border-t border-gray-200 pt-2 mt-2">
                     <div className="flex justify-between">
-                      <span className="text-gray-300 font-medium">Net amount:</span>
-                      <span className="text-green-400 font-bold">{solNet.toFixed(4)} SOL</span>
+                      <span className="text-gray-900 font-medium">Net amount:</span>
+                      <span className="text-blue-600 font-bold">{solNet.toFixed(4)} SOL</span>
                     </div>
                   </div>
                 </div>
@@ -362,8 +367,8 @@ export default function WebPage() {
       </div>
 
       {/* Footer */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-gray-700/50">
-        <div className="text-center text-sm text-gray-400">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-gray-200">
+        <div className="text-center text-sm text-gray-500">
           <p>Cryptoolate - Reclaim your Solana rent</p>
           <p className="mt-2">Built with Next.js, Reown AppKit, and Solana</p>
         </div>

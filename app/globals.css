@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #f5f7fa;
+  --foreground: #1a1d29;
 }
 
 @theme inline {
@@ -13,9 +13,9 @@
 }
 
 body {
-  background: #111827;
-  color: #ffffff;
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: #f5f7fa;
+  color: #1a1d29;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,4 +28,9 @@ body {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Card shadows matching Wirely aesthetic */
+.card-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
 }

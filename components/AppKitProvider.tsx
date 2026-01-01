@@ -29,7 +29,7 @@ export default function CryptoolateAppKitProvider({ children }: { children: Reac
         analytics: false,
         email: false,
       }}
-      themeMode="dark"
+      themeMode="light"
       themeVariables={{
         '--w3m-accent': '#6366f1',
       }}
