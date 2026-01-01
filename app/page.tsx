@@ -11,11 +11,11 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-neutral-950 to-zinc-950 flex items-center justify-center">
       <div className="text-center">
         <div className="text-4xl mb-4 animate-pulse">⏳</div>
-        <p className="text-gray-600">Redirecting to dashboard...</p>
-      </div>
+        <p className="text-gray-400">Redirecting to dashboard...</p>
+        </div>
     </div>
   );
 }

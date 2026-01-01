@@ -125,24 +125,24 @@ export default function RentFinder() {
   const usdNet = solNet * solPrice;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-neutral-950 to-zinc-950">
       {/* Header */}
       <div className="glass-header sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 mb-1 block">
+              <Link href="/dashboard" className="text-sm text-gray-400 hover:text-[#8fae8a] mb-1 block">
                 ← Back to Dashboard
               </Link>
-              <h1 className="text-2xl font-semibold text-gray-900">💰 The Rent Finder</h1>
-              <p className="text-sm text-gray-500 mt-0.5">
+              <h1 className="text-2xl font-semibold text-gray-100">💰 The Rent Finder</h1>
+              <p className="text-sm text-gray-400 mt-0.5">
                 Reclaim rent from empty token accounts
               </p>
             </div>
             {isConnected && address && (
-              <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="text-xs text-gray-500">Connected</div>
-                <div className="text-xs font-mono text-blue-600">
+              <div className="px-3 py-1.5 glass border-[#7a9b76]/30 rounded-lg">
+                <div className="text-xs text-gray-400">Connected</div>
+                <div className="text-xs font-mono text-[#8fae8a]">
                   {address.slice(0, 4)}...{address.slice(-4)}
                 </div>
               </div>
@@ -156,13 +156,13 @@ export default function RentFinder() {
         {!isConnected ? (
           <div className="glass rounded-xl p-6 text-center space-y-4">
             <div className="text-5xl mb-2">🔍</div>
-            <h2 className="text-xl font-semibold text-gray-900">Connect Wallet to Scan</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-xl font-semibold text-gray-100">Connect Wallet to Scan</h2>
+            <p className="text-sm text-gray-400">
               Connect your Phantom, Solflare, or Backpack wallet to find unclaimed rent
             </p>
             <button
               onClick={() => open()}
-              className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors mt-4"
+              className="w-full px-6 py-3 bg-[#7a9b76] hover:bg-[#8fae8a] text-white font-medium rounded-lg transition-colors mt-4"
             >
               Connect Wallet
             </button>
@@ -172,10 +172,10 @@ export default function RentFinder() {
             {isScanning ? (
               <div className="glass rounded-xl p-8 text-center">
                 <div className="text-5xl mb-4 animate-pulse">💰</div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Scanning blockchain...</h2>
-                <p className="text-sm text-gray-600">Looking for zombie accounts...</p>
-                <div className="mt-6 w-full bg-gray-100 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+                <h2 className="text-xl font-semibold text-gray-100 mb-2">Scanning blockchain...</h2>
+                <p className="text-sm text-gray-400">Looking for zombie accounts...</p>
+                <div className="mt-6 w-full bg-gray-900/50 rounded-full h-2">
+                  <div className="bg-[#7a9b76] h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
                 </div>
               </div>
             ) : (
@@ -183,37 +183,37 @@ export default function RentFinder() {
                 {zombieAccounts.length > 0 ? (
                   <>
                     <div className="glass rounded-xl p-6">
-                      <div className="text-sm text-gray-500 mb-1">Total Portfolio Value</div>
-                      <div className="text-3xl font-semibold text-gray-900 mb-4">
+                      <div className="text-sm text-gray-400 mb-1">Total Portfolio Value</div>
+                      <div className="text-3xl font-semibold text-gray-100 mb-4">
                         {solRefund.toFixed(4)} SOL
                       </div>
-                      <div className="text-sm text-gray-500">~${(solRefund * solPrice).toFixed(2)} USD</div>
+                      <div className="text-sm text-gray-400">~${(solRefund * solPrice).toFixed(2)} USD</div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="glass rounded-xl p-4">
-                        <div className="text-xs text-gray-500 mb-1">Zombie Accounts</div>
-                        <div className="text-2xl font-semibold text-gray-900">{zombieAccounts.length}</div>
+                        <div className="text-xs text-gray-400 mb-1">Zombie Accounts</div>
+                        <div className="text-2xl font-semibold text-gray-100">{zombieAccounts.length}</div>
                       </div>
                       <div className="glass rounded-xl p-4">
-                        <div className="text-xs text-gray-500 mb-1">Service Fee</div>
-                        <div className="text-2xl font-semibold text-yellow-600">{solFee.toFixed(4)} SOL</div>
+                        <div className="text-xs text-gray-400 mb-1">Service Fee</div>
+                        <div className="text-2xl font-semibold text-amber-400">{solFee.toFixed(4)} SOL</div>
                       </div>
                     </div>
 
-                    <div className="glass-dark rounded-xl p-6 border border-blue-200/50">
-                      <div className="text-sm text-gray-600 mb-1">You Will Receive</div>
-                      <div className="text-3xl font-bold text-blue-600 mb-1">
+                    <div className="glass-dark rounded-xl p-6 border border-[#7a9b76]/30">
+                      <div className="text-sm text-gray-400 mb-1">You Will Receive</div>
+                      <div className="text-3xl font-bold text-[#8fae8a] mb-1">
                         {solNet.toFixed(4)} SOL
                       </div>
-                      <div className="text-sm text-gray-500">~${usdNet.toFixed(2)} USD</div>
+                      <div className="text-sm text-gray-400">~${usdNet.toFixed(2)} USD</div>
                     </div>
 
                     {batches.length > 1 && (
                       <div className="glass rounded-xl p-4">
                         <div className="flex justify-between items-center mb-3">
-                          <span className="text-sm text-gray-600">Transaction Batch</span>
-                          <span className="text-sm font-semibold text-gray-900">
+                          <span className="text-sm text-gray-400">Transaction Batch</span>
+                          <span className="text-sm font-semibold text-gray-100">
                             {currentBatch + 1} of {batches.length}
                           </span>
                         </div>
@@ -221,14 +221,14 @@ export default function RentFinder() {
                           <button
                             onClick={() => setCurrentBatch(Math.max(0, currentBatch - 1))}
                             disabled={currentBatch === 0}
-                            className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 text-gray-700 rounded-lg transition-colors text-sm font-medium"
+                            className="flex-1 px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 disabled:opacity-30 disabled:cursor-not-allowed text-gray-300 rounded-lg transition-colors text-sm font-medium"
                           >
                             Previous
                           </button>
                           <button
                             onClick={() => setCurrentBatch(Math.min(batches.length - 1, currentBatch + 1))}
                             disabled={currentBatch === batches.length - 1}
-                            className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 text-gray-700 rounded-lg transition-colors text-sm font-medium"
+                            className="flex-1 px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 disabled:opacity-30 disabled:cursor-not-allowed text-gray-300 rounded-lg transition-colors text-sm font-medium"
                           >
                             Next
                           </button>
@@ -239,7 +239,7 @@ export default function RentFinder() {
                     <button
                       onClick={() => handleClaim(currentBatchAccounts)}
                       disabled={isClaiming || currentBatchAccounts.length === 0}
-                      className="w-full px-6 py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors card-shadow"
+                      className="w-full px-6 py-4 bg-[#7a9b76] hover:bg-[#8fae8a] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors card-shadow"
                     >
                       {isClaiming ? (
                         <span className="flex items-center justify-center gap-2">
@@ -251,9 +251,9 @@ export default function RentFinder() {
                       )}
                     </button>
 
-                    <div className="glass rounded-xl p-4 text-sm border border-blue-200/50">
-                      <p className="font-medium text-blue-900 mb-2">ℹ️ How it works</p>
-                      <ul className="list-disc list-inside space-y-1 text-xs text-blue-800">
+                    <div className="glass rounded-xl p-4 text-sm border border-[#7a9b76]/30">
+                      <p className="font-medium text-[#8fae8a] mb-2">ℹ️ How it works</p>
+                      <ul className="list-disc list-inside space-y-1 text-xs text-gray-400">
                         <li>Closing empty accounts refunds the rent you paid</li>
                         <li>Transaction is atomic - you only pay if the claim succeeds</li>
                         <li>Large account sets are split into batches</li>
@@ -263,13 +263,13 @@ export default function RentFinder() {
                 ) : (
                   <div className="glass rounded-xl p-8 text-center">
                     <div className="text-5xl mb-4">✅</div>
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">No Zombie Accounts Found</h2>
-                    <p className="text-sm text-gray-600 mb-4">
+                    <h2 className="text-xl font-semibold text-gray-100 mb-2">No Zombie Accounts Found</h2>
+                    <p className="text-sm text-gray-400 mb-4">
                       Your wallet is clean! All your token accounts are in use.
                     </p>
                     <button
                       onClick={handleScan}
-                      className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+                      className="px-6 py-2 bg-[#7a9b76] hover:bg-[#8fae8a] text-white rounded-lg transition-colors text-sm font-medium"
                     >
                       Scan Again
                     </button>
@@ -279,7 +279,7 @@ export default function RentFinder() {
             )}
 
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
+              <div className="glass-dark border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
                 {error}
               </div>
             )}
@@ -288,12 +288,12 @@ export default function RentFinder() {
               {isConnected && address ? (
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-xs text-gray-500">Connected Wallet</div>
-                    <div className="text-sm font-mono text-gray-900">{address.slice(0, 8)}...{address.slice(-6)}</div>
+                    <div className="text-xs text-gray-400">Connected Wallet</div>
+                    <div className="text-sm font-mono text-gray-100">{address.slice(0, 8)}...{address.slice(-6)}</div>
                   </div>
                   <button
                     onClick={() => open({ view: 'Account' })}
-                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+                    className="px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 text-gray-300 rounded-lg text-sm font-medium transition-colors"
                   >
                     Disconnect
                   </button>
@@ -301,7 +301,7 @@ export default function RentFinder() {
               ) : (
                 <button
                   onClick={() => open()}
-                  className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+                  className="w-full px-6 py-3 bg-[#7a9b76] hover:bg-[#8fae8a] text-white font-medium rounded-lg transition-colors"
                 >
                   Connect Wallet
                 </button>

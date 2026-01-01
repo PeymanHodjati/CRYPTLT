@@ -29,9 +29,11 @@ export default function ManageSolanaAppKitProvider({ children }: { children: Rea
         analytics: false,
         email: false,
       }}
-      themeMode="light"
+      themeMode="dark"
       themeVariables={{
-        '--w3m-accent': '#6366f1',
+        '--w3m-accent': '#7a9b76',
+        '--w3m-color-mix': '#8fae8a',
+        '--w3m-color-mix-strength': 20,
       }}
     >
       {children}

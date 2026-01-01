@@ -121,24 +121,24 @@ export default function Permissions() {
   const riskCount = approvals.filter(a => a.amount && Number(a.amount) > 1000000).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-neutral-950 to-zinc-950">
       {/* Header */}
       <div className="glass-header sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 mb-1 block">
+              <Link href="/dashboard" className="text-sm text-gray-400 hover:text-gray-300 mb-1 block">
                 ← Back to Dashboard
               </Link>
-              <h1 className="text-2xl font-semibold text-gray-900">🔒 Permissions Revoke</h1>
-              <p className="text-sm text-gray-500 mt-0.5">
+              <h1 className="text-2xl font-semibold text-gray-100">🔒 Permissions Revoke</h1>
+              <p className="text-sm text-gray-400 mt-0.5">
                 Revoke risky token approvals
               </p>
             </div>
             {isConnected && address && (
-              <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="text-xs text-gray-500">Connected</div>
-                <div className="text-xs font-mono text-blue-600">
+              <div className="px-3 py-1.5 glass border-[#7a9b76]/30 rounded-lg">
+                <div className="text-xs text-gray-400">Connected</div>
+                <div className="text-xs font-mono text-[#8fae8a]">
                   {address.slice(0, 4)}...{address.slice(-4)}
                 </div>
               </div>
@@ -152,13 +152,13 @@ export default function Permissions() {
         {!isConnected ? (
           <div className="glass rounded-xl p-6 text-center space-y-4">
             <div className="text-5xl mb-2">🔍</div>
-            <h2 className="text-xl font-semibold text-gray-900">Connect Wallet to Scan</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-xl font-semibold text-gray-100">Connect Wallet to Scan</h2>
+            <p className="text-sm text-gray-400">
               Find and revoke risky token approvals
             </p>
             <button
               onClick={() => open()}
-              className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors mt-4"
+              className="w-full px-6 py-3 bg-[#7a9b76] hover:bg-[#8fae8a] text-white font-medium rounded-lg transition-colors mt-4"
             >
               Connect Wallet
             </button>
@@ -168,9 +168,9 @@ export default function Permissions() {
             {isScanning ? (
               <div className="glass rounded-xl p-8 text-center">
                 <div className="text-5xl mb-4 animate-pulse">🔒</div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Scanning for Risks...</h2>
-                <p className="text-sm text-gray-600">Checking token approvals...</p>
-                <div className="mt-6 w-full bg-gray-100 rounded-full h-2">
+                <h2 className="text-xl font-semibold text-gray-100 mb-2">Scanning for Risks...</h2>
+                <p className="text-sm text-gray-400">Checking token approvals...</p>
+                <div className="mt-6 w-full bg-gray-900/50 rounded-full h-2">
                   <div className="bg-purple-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
                 </div>
               </div>
@@ -181,19 +181,19 @@ export default function Permissions() {
                     <div className="glass rounded-xl p-6">
                       <div className="flex justify-between items-center mb-4">
                         <div>
-                          <div className="text-sm text-gray-500 mb-1">Active Approvals</div>
-                          <div className="text-2xl font-semibold text-gray-900">{approvals.length}</div>
+                          <div className="text-sm text-gray-400 mb-1">Active Approvals</div>
+                          <div className="text-2xl font-semibold text-gray-100">{approvals.length}</div>
                         </div>
                         {riskCount > 0 && (
                           <div className="text-right">
-                            <div className="text-sm text-gray-500 mb-1">High Risk</div>
+                            <div className="text-sm text-gray-400 mb-1">High Risk</div>
                             <div className="text-2xl font-semibold text-red-600">{riskCount}</div>
                           </div>
                         )}
                       </div>
                       <button
                         onClick={selectAll}
-                        className="w-full px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+                        className="w-full px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 text-gray-300 rounded-lg text-sm font-medium transition-colors"
                       >
                         Select All
                       </button>
@@ -217,23 +217,23 @@ export default function Permissions() {
                           >
                             <div className="flex justify-between items-start mb-2">
                               <div className="flex-1">
-                                <div className="text-xs font-mono text-gray-600 mb-1 truncate">
+                                <div className="text-xs font-mono text-gray-400 mb-1 truncate">
                                   {approval.mint.slice(0, 8)}...
                                 </div>
                                 {approval.delegate && (
-                                  <div className="text-xs text-gray-500">
+                                  <div className="text-xs text-gray-400">
                                     Delegate: {approval.delegate.toBase58().slice(0, 8)}...
                                   </div>
                                 )}
                               </div>
                               {isHighRisk && (
-                                <span className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-medium">
+                                <span className="px-2 py-1 bg-red-100 text-red-400 rounded text-xs font-medium">
                                   High Risk
                                 </span>
                               )}
                             </div>
                             {approval.amount && (
-                              <div className="text-xs text-gray-600">
+                              <div className="text-xs text-gray-400">
                                 Amount: {approval.amount}
                               </div>
                             )}
@@ -244,10 +244,10 @@ export default function Permissions() {
 
                     {selectedCount > 0 && (
                       <div className="glass-dark rounded-xl p-6 border border-purple-200/50">
-                        <div className="text-sm text-gray-600 mb-4">
+                        <div className="text-sm text-gray-400 mb-4">
                           Revoking {selectedCount} permission{selectedCount > 1 ? 's' : ''}
                         </div>
-                        <div className="text-xs text-gray-500 mb-4">
+                        <div className="text-xs text-gray-400 mb-4">
                           This action is free. No fees charged.
                         </div>
                         <button
@@ -270,13 +270,13 @@ export default function Permissions() {
                 ) : (
                   <div className="glass rounded-xl p-8 text-center">
                     <div className="text-5xl mb-4">✅</div>
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">No Active Approvals</h2>
-                    <p className="text-sm text-gray-600 mb-4">
+                    <h2 className="text-xl font-semibold text-gray-100 mb-2">No Active Approvals</h2>
+                    <p className="text-sm text-gray-400 mb-4">
                       Your wallet is secure! No risky token approvals found.
                     </p>
                     <button
                       onClick={handleScan}
-                      className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+                      className="px-6 py-2 bg-[#7a9b76] hover:bg-[#8fae8a] text-white rounded-lg transition-colors text-sm font-medium"
                     >
                       Scan Again
                     </button>
@@ -286,7 +286,7 @@ export default function Permissions() {
             )}
 
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
+              <div className="glass-dark border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
                 {error}
               </div>
             )}

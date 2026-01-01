@@ -68,24 +68,24 @@ export default function LooseChange() {
   const solPrice = 160;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-neutral-950 to-zinc-950">
       {/* Header */}
       <div className="glass-header sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 mb-1 block">
+              <Link href="/dashboard" className="text-sm text-gray-400 hover:text-gray-300 mb-1 block">
                 ← Back to Dashboard
               </Link>
-              <h1 className="text-2xl font-semibold text-gray-900">🪙 Loose Change Collector</h1>
-              <p className="text-sm text-gray-500 mt-0.5">
+              <h1 className="text-2xl font-semibold text-gray-100">🪙 Loose Change Collector</h1>
+              <p className="text-sm text-gray-400 mt-0.5">
                 Batch swap small token balances into SOL
               </p>
             </div>
             {isConnected && address && (
-              <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="text-xs text-gray-500">Connected</div>
-                <div className="text-xs font-mono text-blue-600">
+              <div className="px-3 py-1.5 glass border-[#7a9b76]/30 rounded-lg">
+                <div className="text-xs text-gray-400">Connected</div>
+                <div className="text-xs font-mono text-[#8fae8a]">
                   {address.slice(0, 4)}...{address.slice(-4)}
                 </div>
               </div>
@@ -99,13 +99,13 @@ export default function LooseChange() {
         {!isConnected ? (
           <div className="glass rounded-xl p-6 text-center space-y-4">
             <div className="text-5xl mb-2">🔍</div>
-            <h2 className="text-xl font-semibold text-gray-900">Connect Wallet to Scan</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-xl font-semibold text-gray-100">Connect Wallet to Scan</h2>
+            <p className="text-sm text-gray-400">
               Find small token balances and convert them to SOL
             </p>
             <button
               onClick={() => open()}
-              className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors mt-4"
+              className="w-full px-6 py-3 bg-[#7a9b76] hover:bg-[#8fae8a] text-white font-medium rounded-lg transition-colors mt-4"
             >
               Connect Wallet
             </button>
@@ -115,9 +115,9 @@ export default function LooseChange() {
             {isScanning ? (
               <div className="glass rounded-xl p-8 text-center">
                 <div className="text-5xl mb-4 animate-pulse">🪙</div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Scanning wallet...</h2>
-                <p className="text-sm text-gray-600">Looking for dust tokens...</p>
-                <div className="mt-6 w-full bg-gray-100 rounded-full h-2">
+                <h2 className="text-xl font-semibold text-gray-100 mb-2">Scanning wallet...</h2>
+                <p className="text-sm text-gray-400">Looking for dust tokens...</p>
+                <div className="mt-6 w-full bg-gray-900/50 rounded-full h-2">
                   <div className="bg-green-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
                 </div>
               </div>
@@ -126,11 +126,11 @@ export default function LooseChange() {
                 {dustTokens.length > 0 ? (
                   <>
                     <div className="glass rounded-xl p-6">
-                      <div className="text-sm text-gray-500 mb-1">Total Dust Value</div>
-                      <div className="text-3xl font-semibold text-gray-900 mb-4">
+                      <div className="text-sm text-gray-400 mb-1">Total Dust Value</div>
+                      <div className="text-3xl font-semibold text-gray-100 mb-4">
                         ${totalUsdValue.toFixed(2)}
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-gray-400">
                         {dustTokens.length} tokens with &lt;$1.00 balance
                       </div>
                     </div>
@@ -140,21 +140,21 @@ export default function LooseChange() {
                         {dustTokens.map((token, idx) => (
                           <div key={idx} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                             <div>
-                              <div className="text-sm font-medium text-gray-900">{token.mint.slice(0, 8)}...</div>
-                              <div className="text-xs text-gray-500">${token.usdValue.toFixed(2)}</div>
+                              <div className="text-sm font-medium text-gray-100">{token.mint.slice(0, 8)}...</div>
+                              <div className="text-xs text-gray-400">${token.usdValue.toFixed(2)}</div>
                             </div>
-                            <div className="text-sm text-gray-600">{token.balance.toFixed(4)}</div>
+                            <div className="text-sm text-gray-400">{token.balance.toFixed(4)}</div>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     <div className="glass-dark rounded-xl p-6 border border-green-200/50">
-                      <div className="text-sm text-gray-600 mb-1">You Will Receive</div>
+                      <div className="text-sm text-gray-400 mb-1">You Will Receive</div>
                       <div className="text-3xl font-bold text-green-600 mb-1">
                         {((totalUsdValue / solPrice) - fee).toFixed(4)} SOL
                       </div>
-                      <div className="text-xs text-gray-500 mb-3">
+                      <div className="text-xs text-gray-400 mb-3">
                         Fee: {fee} SOL (~${(fee * solPrice).toFixed(2)})
                       </div>
                       <button
@@ -169,13 +169,13 @@ export default function LooseChange() {
                 ) : (
                   <div className="glass rounded-xl p-8 text-center">
                     <div className="text-5xl mb-4">✅</div>
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">No Dust Tokens Found</h2>
-                    <p className="text-sm text-gray-600 mb-4">
+                    <h2 className="text-xl font-semibold text-gray-100 mb-2">No Dust Tokens Found</h2>
+                    <p className="text-sm text-gray-400 mb-4">
                       {error || 'Your wallet is clean! No small token balances detected.'}
                     </p>
                     <button
                       onClick={handleScan}
-                      className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+                      className="px-6 py-2 bg-[#7a9b76] hover:bg-[#8fae8a] text-white rounded-lg transition-colors text-sm font-medium"
                     >
                       Scan Again
                     </button>

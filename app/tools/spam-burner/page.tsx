@@ -128,24 +128,24 @@ export default function SpamBurner() {
   const userReceives = estimatedRent - fee;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-neutral-950 to-zinc-950">
       {/* Header */}
       <div className="glass-header sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 mb-1 block">
+              <Link href="/dashboard" className="text-sm text-gray-400 hover:text-[#8fae8a] mb-1 block">
                 ← Back to Dashboard
               </Link>
-              <h1 className="text-2xl font-semibold text-gray-900">🔥 The Spam Burner</h1>
-              <p className="text-sm text-gray-500 mt-0.5">
+              <h1 className="text-2xl font-semibold text-gray-100">🔥 The Spam Burner</h1>
+              <p className="text-sm text-gray-400 mt-0.5">
                 Burn spam NFTs and tokens, reclaim rent
               </p>
             </div>
             {isConnected && address && (
-              <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="text-xs text-gray-500">Connected</div>
-                <div className="text-xs font-mono text-blue-600">
+              <div className="px-3 py-1.5 glass border-[#7a9b76]/30 rounded-lg">
+                <div className="text-xs text-gray-400">Connected</div>
+                <div className="text-xs font-mono text-[#8fae8a]">
                   {address.slice(0, 4)}...{address.slice(-4)}
                 </div>
               </div>
@@ -159,13 +159,13 @@ export default function SpamBurner() {
         {!isConnected ? (
           <div className="glass rounded-xl p-6 text-center space-y-4">
             <div className="text-5xl mb-2">🔍</div>
-            <h2 className="text-xl font-semibold text-gray-900">Connect Wallet to Scan</h2>
-            <p className="text-sm text-gray-600">
+            <h2 className="text-xl font-semibold text-gray-100">Connect Wallet to Scan</h2>
+            <p className="text-sm text-gray-400">
               Find and burn spam NFTs and tokens cluttering your wallet
             </p>
             <button
               onClick={() => open()}
-              className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors mt-4"
+              className="w-full px-6 py-3 bg-[#7a9b76] hover:bg-[#8fae8a] text-white font-medium rounded-lg transition-colors mt-4"
             >
               Connect Wallet
             </button>
@@ -175,10 +175,10 @@ export default function SpamBurner() {
             {isScanning ? (
               <div className="glass rounded-xl p-8 text-center">
                 <div className="text-5xl mb-4 animate-pulse">🔥</div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Scanning wallet...</h2>
-                <p className="text-sm text-gray-600">Looking for spam items...</p>
-                <div className="mt-6 w-full bg-gray-100 rounded-full h-2">
-                  <div className="bg-orange-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+                <h2 className="text-xl font-semibold text-gray-100 mb-2">Scanning wallet...</h2>
+                <p className="text-sm text-gray-400">Looking for spam items...</p>
+                <div className="mt-6 w-full bg-gray-900/50 rounded-full h-2">
+                  <div className="bg-orange-500 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
                 </div>
               </div>
             ) : (
@@ -189,24 +189,24 @@ export default function SpamBurner() {
                     <div className="glass rounded-xl p-6">
                       <div className="flex justify-between items-center mb-4">
                         <div>
-                          <div className="text-sm text-gray-500 mb-1">Found Items</div>
-                          <div className="text-2xl font-semibold text-gray-900">{spamItems.length}</div>
+                          <div className="text-sm text-gray-400 mb-1">Found Items</div>
+                          <div className="text-2xl font-semibold text-gray-100">{spamItems.length}</div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm text-gray-500 mb-1">Selected</div>
-                          <div className="text-2xl font-semibold text-orange-600">{selectedCount}</div>
+                          <div className="text-sm text-gray-400 mb-1">Selected</div>
+                          <div className="text-2xl font-semibold text-orange-400">{selectedCount}</div>
                         </div>
                       </div>
                       <div className="flex gap-2">
                         <button
                           onClick={selectAll}
-                          className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+                          className="flex-1 px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 text-gray-300 rounded-lg text-sm font-medium transition-colors"
                         >
                           Select All
                         </button>
                         <button
                           onClick={selectDust}
-                          className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+                          className="flex-1 px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 text-gray-300 rounded-lg text-sm font-medium transition-colors"
                         >
                           Select Dust
                         </button>
@@ -224,11 +224,11 @@ export default function SpamBurner() {
                               onClick={() => toggleSelection(item.pubkey.toBase58())}
                               className={`p-3 rounded-lg border-2 transition-all text-left ${
                                 isSelected
-                                  ? 'border-orange-500 bg-orange-50'
-                                  : 'border-gray-200 bg-white hover:border-gray-300'
+                                  ? 'border-orange-500 bg-orange-500/10'
+                                  : 'border-[#7a9b76]/20 glass-dark hover:border-[#7a9b76]/40'
                               }`}
                             >
-                              <div className="text-xs font-mono text-gray-600 mb-1 truncate">
+                              <div className="text-xs font-mono text-gray-400 mb-1 truncate">
                                 {item.pubkey.toBase58().slice(0, 6)}...
                               </div>
                               <div className="text-xs text-gray-500">
@@ -242,9 +242,9 @@ export default function SpamBurner() {
 
                     {/* Revenue Card */}
                     {selectedCount > 0 && (
-                      <div className="glass-dark rounded-xl p-6 border border-orange-200/50">
-                        <div className="text-sm text-gray-600 mb-1">You Will Receive</div>
-                        <div className="text-3xl font-bold text-orange-600 mb-1">
+                      <div className="glass-dark rounded-xl p-6 border border-orange-500/30">
+                        <div className="text-sm text-gray-400 mb-1">You Will Receive</div>
+                        <div className="text-3xl font-bold text-orange-400 mb-1">
                           {userReceives.toFixed(4)} SOL
                         </div>
                         <div className="text-xs text-gray-500 mb-3">
@@ -253,7 +253,7 @@ export default function SpamBurner() {
                         <button
                           onClick={handleBurn}
                           disabled={isBurning}
-                          className="w-full px-6 py-4 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
+                          className="w-full px-6 py-4 bg-orange-600 hover:bg-orange-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
                         >
                           {isBurning ? (
                             <span className="flex items-center justify-center gap-2">
@@ -270,13 +270,13 @@ export default function SpamBurner() {
                 ) : (
                   <div className="glass rounded-xl p-8 text-center">
                     <div className="text-5xl mb-4">✅</div>
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">No Spam Items Found</h2>
-                    <p className="text-sm text-gray-600 mb-4">
+                    <h2 className="text-xl font-semibold text-gray-100 mb-2">No Spam Items Found</h2>
+                    <p className="text-sm text-gray-400 mb-4">
                       Your wallet is clean! No spam NFTs or tokens detected.
                     </p>
                     <button
                       onClick={handleScan}
-                      className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
+                      className="px-6 py-2 bg-[#7a9b76] hover:bg-[#8fae8a] text-white rounded-lg transition-colors text-sm font-medium"
                     >
                       Scan Again
                     </button>
@@ -286,7 +286,7 @@ export default function SpamBurner() {
             )}
 
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
+              <div className="glass-dark border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
                 {error}
               </div>
             )}
