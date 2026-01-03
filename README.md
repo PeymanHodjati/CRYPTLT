@@ -7,7 +7,6 @@ A comprehensive Telegram Mini App that provides multiple tools to manage and opt
 ### 🛠️ Multi-Tool Dashboard
 - **💰 The Rent Finder**: Reclaim rent from empty token accounts
 - **🔥 The Spam Burner**: Burn spam NFTs and tokens, reclaim rent
-- **🪙 Loose Change Collector**: Batch swap small token balances into SOL
 - **🔒 Permissions Revoke**: Revoke risky token approvals (free)
 
 ### Core Features
@@ -129,12 +128,6 @@ https://cryptoolate.com
 3. **User clicks "Incinerate"** - items are closed and rent is refunded
 4. **15% fee** is taken from the refunded rent
 
-### Loose Change Collector
-1. **App scans** for tokens with small balances (<$1)
-2. **User selects** tokens to swap
-3. **Batch swap** via Jupiter API converts all to SOL
-4. **1% spread** or 0.01 SOL flat fee
-
 ### Permissions Revoke
 1. **App scans** for active token approvals
 2. **User reviews** risky permissions
@@ -157,7 +150,6 @@ Solana transactions have a size limit (~1232 bytes). The app automatically batch
 
 - **Rent Finder**: 0.005 SOL (~$1) per claim transaction
 - **Spam Burner**: 15% of refunded rent per burn
-- **Loose Change Collector**: 1% spread or 0.01 SOL flat fee
 - **Permissions Revoke**: Free (no fees)
 
 All fees are taken from reclaimed/optimized funds - users never pay extra.

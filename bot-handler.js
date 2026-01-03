@@ -59,7 +59,6 @@ bot.onText(/\/help/, (msg) => {
     `*Available Tools:*\n` +
     `💰 The Rent Finder - Reclaim rent from empty accounts\n` +
     `🔥 The Spam Burner - Burn spam NFTs and tokens\n` +
-    `🪙 Loose Change Collector - Swap small balances to SOL\n` +
     `🔒 Permissions Revoke - Revoke risky token approvals\n\n` +
     `*How to Use:*\n` +
     `1. Click the menu button or use /start\n` +

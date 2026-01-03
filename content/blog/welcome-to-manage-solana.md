@@ -19,7 +19,6 @@ Manage Solana is a comprehensive Telegram Mini App and web application designed 
 
 - **Reclaim Rent**: Find and recover SOL locked in empty token accounts
 - **Burn Spam**: Remove unwanted NFTs and dust tokens while reclaiming rent
-- **Collect Loose Change**: Batch swap small token balances into SOL
 - **Revoke Permissions**: Safely remove risky token approvals
 
 ## Why We Built This

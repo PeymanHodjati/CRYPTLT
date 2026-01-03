@@ -27,15 +27,6 @@ export default function Dashboard() {
       status: 'active',
     },
     {
-      id: 'loose-change',
-      name: 'Loose Change Collector',
-      description: 'Batch swap small token balances into SOL',
-      icon: '🪙',
-      color: 'from-teal-700 to-cyan-800',
-      href: '/tools/loose-change',
-      status: 'active',
-    },
-    {
       id: 'permissions',
       name: 'Free Permissions Revoke',
       description: 'Revoke risky token approvals',
@@ -95,7 +86,7 @@ export default function Dashboard() {
         </div>
 
         {/* Tool Cards Grid - Always Visible */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {tools.map((tool) => (
             <Link
               key={tool.id}

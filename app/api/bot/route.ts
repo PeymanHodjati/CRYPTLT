@@ -70,7 +70,6 @@ export async function POST(req: Request) {
                 `*Available Tools:*\n` +
                 `💰 *The Rent Finder* - Reclaim rent from empty token accounts\n` +
                 `🔥 *The Spam Burner* - Burn spam NFTs and tokens, reclaim rent\n` +
-                `🪙 *Loose Change Collector* - Batch swap small token balances into SOL\n` +
                 `🔒 *Permissions Revoke* - Revoke risky token approvals (free)\n\n` +
                 `*How to Use:*\n` +
                 `1. Click the button below to open the app\n` +
