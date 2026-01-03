@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ManageSolanaAppKitProvider from "@/components/AppKitProvider";
+import SecurityBanner from "@/components/SecurityBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0e12] text-[#e8eaed]`}
       >
         <ManageSolanaAppKitProvider>
-        {children}
+          <SecurityBanner />
+          {children}
         </ManageSolanaAppKitProvider>
       </body>
     </html>

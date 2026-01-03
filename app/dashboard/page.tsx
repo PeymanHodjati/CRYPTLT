@@ -164,6 +164,26 @@ export default function Dashboard() {
             </p>
           </div>
         </div>
+
+        {/* Footer */}
+        <div className="mt-12 pt-8 border-t border-[#7a9b76]/20">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-500">
+              © 2026 Manage Solana. Non-custodial Solana wallet optimization.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <Link href="/security" className="text-gray-400 hover:text-[#8fae8a] transition-colors">
+                Security & FAQ
+              </Link>
+              <Link href="/privacy" className="text-gray-400 hover:text-[#8fae8a] transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-gray-400 hover:text-[#8fae8a] transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
