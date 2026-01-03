@@ -171,7 +171,7 @@ export default function Permissions() {
                 <h2 className="text-xl font-semibold text-gray-100 mb-2">Scanning for Risks...</h2>
                 <p className="text-sm text-gray-400">Checking token approvals...</p>
                 <div className="mt-6 w-full bg-gray-900/50 rounded-full h-2">
-                  <div className="bg-purple-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+                  <div className="bg-[#7a9b76] h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
                 </div>
               </div>
             ) : (
@@ -209,15 +209,15 @@ export default function Permissions() {
                             onClick={() => toggleSelection(approval.tokenAccount.toBase58())}
                             className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                               isSelected
-                                ? 'border-purple-500 bg-purple-50'
+                                ? 'border-[#7a9b76] glass-dark bg-[#7a9b76]/10'
                                 : isHighRisk
-                                ? 'border-red-200 bg-red-50'
-                                : 'border-gray-200 bg-white hover:border-gray-300'
+                                ? 'border-red-500/50 glass-dark bg-red-500/5'
+                                : 'border-[#7a9b76]/20 glass-dark hover:border-[#7a9b76]/40'
                             }`}
                           >
                             <div className="flex justify-between items-start mb-2">
                               <div className="flex-1">
-                                <div className="text-xs font-mono text-gray-400 mb-1 truncate">
+                                <div className="text-xs font-mono text-gray-300 mb-1 truncate">
                                   {approval.mint.slice(0, 8)}...
                                 </div>
                                 {approval.delegate && (
@@ -227,7 +227,7 @@ export default function Permissions() {
                                 )}
                               </div>
                               {isHighRisk && (
-                                <span className="px-2 py-1 bg-red-100 text-red-400 rounded text-xs font-medium">
+                                <span className="px-2 py-1 glass-dark border border-red-500/50 text-red-400 rounded text-xs font-medium">
                                   High Risk
                                 </span>
                               )}
@@ -243,17 +243,17 @@ export default function Permissions() {
                     </div>
 
                     {selectedCount > 0 && (
-                      <div className="glass-dark rounded-xl p-6 border border-purple-200/50">
+                      <div className="glass-dark rounded-xl p-6 border border-[#7a9b76]/30">
                         <div className="text-sm text-gray-400 mb-4">
                           Revoking {selectedCount} permission{selectedCount > 1 ? 's' : ''}
                         </div>
-                        <div className="text-xs text-gray-400 mb-4">
+                        <div className="text-xs text-[#8fae8a] mb-4">
                           This action is free. No fees charged.
                         </div>
                         <button
                           onClick={handleRevoke}
                           disabled={isRevoking}
-                          className="w-full px-6 py-4 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
+                          className="w-full px-6 py-4 bg-[#7a9b76] hover:bg-[#8fae8a] disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
                         >
                           {isRevoking ? (
                             <span className="flex items-center justify-center gap-2">

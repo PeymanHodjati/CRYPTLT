@@ -34,7 +34,7 @@ export default function ClaimButton({ accounts, onClaim, disabled }: ClaimButton
       <button
         onClick={handleClaim}
         disabled={disabled || isClaiming || accounts.length === 0}
-        className="w-full px-6 py-4 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-bold rounded-lg transition-colors text-lg"
+        className="w-full px-6 py-4 bg-[#7a9b76] hover:bg-[#8fae8a] disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold rounded-lg transition-colors text-lg"
       >
         {isClaiming ? (
           <span className="flex items-center justify-center gap-2">

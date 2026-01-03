@@ -173,7 +173,7 @@ export default function WebPage() {
                     <div className="text-6xl mb-4 animate-pulse">💰</div>
                     <h2 className="text-2xl font-semibold text-gray-100 mb-2">Scanning blockchain...</h2>
                     <p className="text-gray-400">Looking for zombie accounts...</p>
-                    <div className="mt-6 w-full bg-gray-100 rounded-full h-2">
+                    <div className="mt-6 w-full bg-gray-900/50 rounded-full h-2">
                       <div className="bg-[#7a9b76] h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
                     </div>
                   </div>
@@ -202,7 +202,7 @@ export default function WebPage() {
                           </div>
                           <div className="glass rounded-xl p-4">
                             <div className="text-xs text-gray-500 mb-1">Monthly Change</div>
-                            <div className="text-2xl font-semibold text-green-600">+ {((solNet / (solRefund || 1)) * 100).toFixed(1)}%</div>
+                            <div className="text-2xl font-semibold text-[#8fae8a]">+ {((solNet / (solRefund || 1)) * 100).toFixed(1)}%</div>
                           </div>
                           <div className="glass rounded-xl p-4">
                             <div className="text-xs text-gray-500 mb-1">Avg Claim Size</div>
@@ -242,14 +242,14 @@ export default function WebPage() {
                               <button
                                 onClick={() => setCurrentBatch(Math.max(0, currentBatch - 1))}
                                 disabled={currentBatch === 0}
-                                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 text-gray-300 rounded-lg transition-colors text-sm font-medium"
+                                className="flex-1 px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 disabled:bg-gray-900/30 disabled:text-gray-600 text-gray-300 rounded-lg transition-colors text-sm font-medium"
                               >
                                 Previous
                               </button>
                               <button
                                 onClick={() => setCurrentBatch(Math.min(batches.length - 1, currentBatch + 1))}
                                 disabled={currentBatch === batches.length - 1}
-                                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 text-gray-300 rounded-lg transition-colors text-sm font-medium"
+                                className="flex-1 px-4 py-2 glass-dark hover:bg-[#7a9b76]/20 disabled:bg-gray-900/30 disabled:text-gray-600 text-gray-300 rounded-lg transition-colors text-sm font-medium"
                               >
                                 Next
                               </button>
@@ -261,7 +261,7 @@ export default function WebPage() {
                         <button
                           onClick={() => handleClaim(currentBatchAccounts)}
                           disabled={isClaiming || currentBatchAccounts.length === 0}
-                          className="w-full px-6 py-4 bg-[#7a9b76] hover:bg-[#8fae8a] disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors card-shadow text-lg"
+                          className="w-full px-6 py-4 bg-[#7a9b76] hover:bg-[#8fae8a] disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors card-shadow text-lg"
                         >
                           {isClaiming ? (
                             <span className="flex items-center justify-center gap-2">
@@ -292,7 +292,7 @@ export default function WebPage() {
                 )}
 
                 {error && (
-                  <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
+                  <div className="glass-dark border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
                     {error}
                   </div>
                 )}
@@ -326,9 +326,9 @@ export default function WebPage() {
             </div>
 
             {/* Safety Info */}
-            <div className="glass rounded-xl p-6 border border-[#7a9b76]/30/50">
-              <h3 className="text-lg font-semibold text-blue-900 mb-3">🔒 Safety & Security</h3>
-              <ul className="space-y-2 text-sm text-blue-800">
+            <div className="glass rounded-xl p-6 border border-[#7a9b76]/30">
+              <h3 className="text-lg font-semibold text-gray-100 mb-3">🔒 Safety & Security</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
                 <li>✓ Atomic transactions - all or nothing</li>
                 <li>✓ You only pay if the claim succeeds</li>
                 <li>✓ Non-custodial - we never touch your keys</li>
@@ -347,13 +347,13 @@ export default function WebPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Rent refund:</span>
-                    <span className="text-green-600 font-mono font-semibold">{solRefund.toFixed(4)} SOL</span>
+                    <span className="text-[#8fae8a] font-mono font-semibold">{solRefund.toFixed(4)} SOL</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Service fee:</span>
                     <span className="text-yellow-600 font-mono font-semibold">{solFee.toFixed(4)} SOL</span>
                   </div>
-                  <div className="border-t border-gray-200 pt-2 mt-2">
+                  <div className="border-t border-[#7a9b76]/20 pt-2 mt-2">
                     <div className="flex justify-between">
                       <span className="text-gray-100 font-medium">Net amount:</span>
                       <span className="text-[#8fae8a] font-bold">{solNet.toFixed(4)} SOL</span>
@@ -367,7 +367,7 @@ export default function WebPage() {
       </div>
 
       {/* Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-white/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-[#7a9b76]/20">
         <div className="text-center text-sm text-gray-500">
           <p>Manage Solana - Reclaim your Solana rent</p>
           <p className="mt-2">Built with Next.js, Reown AppKit, and Solana</p>
